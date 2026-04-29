@@ -341,38 +341,62 @@ const skillObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)
 skillObs.observe(sg);
 
 // GITHUB
-const GH='starlorsarkar';
-// All variations of excluded repo names (lowercase partial match)
-const EXCLUDE=[
-  'retail-analysis','retail_analysis','retailanalysis',
-  'osfin','os-fin',
-  'university-analysis','university_analysis','universityanalysis',
-  'machine-learning','machine_learning','machinelearning','ml-project','ml_project'
-];
-const TAGS=['t-pink','t-blue','t-green','t-amber','t-orange'];
-const EMOJIS={python:'🐍',sql:'🗄️',jupyter:'📓',notebook:'📓',power:'📊',tableau:'📈',excel:'📋',dashboard:'📊',analysis:'🔍',data:'📦',visual:'🎨',eda:'🔬',default:'💼'};
+  const GH = 'starlorsarkar';
+
+const TAGS = ['t-pink','t-blue','t-green','t-amber','t-orange'];
+const EMOJIS = {python:'🐍',sql:'🗄️',jupyter:'📓',notebook:'📓',power:'📊',tableau:'📈',excel:'📋',dashboard:'📊',analysis:'🔍',data:'📦',visual:'🎨',eda:'🔬',default:'💼'};
 function getEmoji(r){const t=((r.name||'')+(r.description||'')+(r.topics||[]).join(' ')).toLowerCase();for(const[k,v] of Object.entries(EMOJIS))if(t.includes(k))return v;return EMOJIS.default}
+
+// 4 pinned projects — edit names here to change what's shown
+const PINNED = [
+  'Walmart_project',
+  'Musicstore-analysis',
+  'Diwali_Sales-Analysis',
+  'HR_ANALYSIS'
+];
+
+const DESCRIPTIONS = {
+  'walmart-project':      'Exploratory analysis of Walmart sales data to uncover customer segments, product trends, and regional performance. Built an interactive Excel dashboard highlighting KPIs and actionable business insights.',
+  'musicstore-analysis':  'Designed a relational database and solved advanced SQL analytical queries on a music store dataset. Analysed customer purchase behaviour and revenue trends using joins and window functions.',
+  'diwali-sales-analysis':'Analysed seasonal Diwali sales data to identify high-performing products and customer demographics. Generated insights to optimise targeting and improve marketing campaign performance.',
+  'hr-analysis':          'Explored HR datasets to surface patterns in employee attrition, department performance, and demographics using Python and data visualisation tools.',
+};
 
 async function loadProjects(){
   try{
-    const res=await fetch(`https://api.github.com/users/${GH}/repos?sort=updated&per_page=100`);
-    const repos=await res.json();
-    if(!Array.isArray(repos))throw new Error();
-    document.getElementById('repo-count').textContent=repos.length;
-    document.getElementById('star-count').textContent=repos.reduce((a,r)=>a+r.stargazers_count,0);
-    const shown=repos
-      .filter(r=>!r.fork&&!EXCLUDE.some(ex=>r.name.toLowerCase().includes(ex)))
-      .sort((a,b)=>b.stargazers_count-a.stargazers_count||new Date(b.updated_at)-new Date(a.updated_at));
-    const container=document.getElementById('proj-container');
-    if(!shown.length){container.innerHTML=`<p style="color:var(--muted);text-align:center;padding:3rem">No projects — <a href="https://github.com/${GH}?tab=repositories" target="_blank" style="color:var(--v2)">View on GitHub →</a></p>`;return}
-    const grid=document.createElement('div');grid.className='proj-grid';
-    shown.forEach((r,i)=>{
-      const emoji=getEmoji(r);
-      const topics=(r.topics||[]).slice(0,4);
-      const updated=new Date(r.updated_at).toLocaleDateString('en-GB',{year:'numeric',month:'short'});
-      const card=document.createElement('div');
-      card.className='proj-card reveal';
-      card.style.transitionDelay=`${(i%6)*0.08}s`;
+    // Fetch stats from all repos (for the stats strip)
+    const allRes = await fetch(`https://api.github.com/users/${GH}/repos?per_page=100`);
+    const allRepos = await allRes.json();
+    if(Array.isArray(allRepos)){
+      document.getElementById('repo-count').textContent = allRepos.length;
+      document.getElementById('star-count').textContent = allRepos.reduce((a,r)=>a+r.stargazers_count,0);
+    }
+
+    // Fetch only the 4 pinned repos individually
+    const results = await Promise.all(
+      PINNED.map(name =>
+        fetch(`https://api.github.com/repos/${GH}/${name}`)
+          .then(r => r.json())
+          .catch(() => null)
+      )
+    );
+
+    const container = document.getElementById('proj-container');
+    const grid = document.createElement('div');
+    grid.className = 'proj-grid';
+
+    results.forEach((r, i) => {
+      if(!r || r.message) return;
+      const key = r.name.toLowerCase().replace(/[-_]/g,'-');
+      const desc = DESCRIPTIONS[key] || r.description || 'A data analytics project exploring insights from real-world datasets using Python and visualisation tools.';
+      const emoji = getEmoji(r);
+      const topics = (r.topics||[]).slice(0,4);
+      const updated = new Date(r.updated_at).toLocaleDateString('en-GB',{year:'numeric',month:'short'});
+      const displayName = r.name.replace(/[-_]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+
+      const card = document.createElement('div');
+      card.className = 'proj-card reveal';
+      card.style.transitionDelay = `${i*0.08}s`;
       card.innerHTML=`
         <div class="proj-top">
           <div class="proj-emoji">${emoji}</div>
@@ -381,8 +405,8 @@ async function loadProjects(){
             <a href="${r.html_url}" target="_blank" class="proj-link">⌥ Code</a>
           </div>
         </div>
-        <div class="proj-name">${r.name.replace(/[-_]/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</div>
-        <div class="proj-desc">${r.description||'A data analytics project exploring insights from real-world datasets using Python and visualisation tools.'}</div>
+        <div class="proj-name">${displayName}</div>
+        <div class="proj-desc">${desc}</div>
         <div class="proj-tags">
           ${topics.map((t,j)=>`<span class="tag ${TAGS[j%TAGS.length]}">${t}</span>`).join('')}
           ${r.language?`<span class="tag t-blue">${r.language}</span>`:''}
@@ -391,12 +415,19 @@ async function loadProjects(){
         </div>`;
       grid.appendChild(card);
     });
-    container.innerHTML='';container.appendChild(grid);
+
+    container.innerHTML='';
+    container.appendChild(grid);
     document.querySelectorAll('.proj-card').forEach(el=>revObs.observe(el));
+
   }catch(e){
+    console.error('loadProjects error:', e);
     document.getElementById('proj-container').innerHTML=`<p style="color:var(--muted);text-align:center;padding:3rem">Couldn't load projects — <a href="https://github.com/${GH}?tab=repositories" target="_blank" style="color:var(--v2)">View on GitHub →</a></p>`;
   }
 }
+  
+
+  
 
 // SCROLL REVEAL
 const revObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revObs.unobserve(e.target)}})},{threshold:0.08});
