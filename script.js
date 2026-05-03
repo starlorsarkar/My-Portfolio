@@ -36,19 +36,21 @@ const TAGS = ['t-pink','t-blue','t-green','t-amber','t-orange'];
 const EMOJIS = {python:'🐍',sql:'🗄️',jupyter:'📓',notebook:'📓',power:'📊',tableau:'📈',excel:'📋',dashboard:'📊',analysis:'🔍',data:'📦',visual:'🎨',eda:'🔬',default:'💼'};
 function getEmoji(r){const t=((r.name||'')+(r.description||'')+(r.topics||[]).join(' ')).toLowerCase();for(const[k,v] of Object.entries(EMOJIS))if(t.includes(k))return v;return EMOJIS.default}
 
-// 4 pinned projects — edit names here to change what's shown
+// 5 pinned projects — edit names here to change what's shown
 const PINNED = [
-  'Walmart_project',
-  'Musicstore-analysis',
-  'Diwali_Sales-Analysis',
-  'HR_ANALYSIS'
+  'Weather_Analysis',
+  'HR_ANALYSIS',
+  'Customer_Churn_Prediction',
+  'Image_Classification_using_ANN',
+  'SQL_Project'
 ];
 
 const DESCRIPTIONS = {
-  'walmart-project':      'Exploratory analysis of Walmart sales data to uncover customer segments, product trends, and regional performance. Built an interactive Excel dashboard highlighting KPIs and actionable business insights.',
-  'musicstore-analysis':  'Designed a relational database and solved advanced SQL analytical queries on a music store dataset. Analysed customer purchase behaviour and revenue trends using joins and window functions.',
-  'diwali-sales-analysis':'Analysed seasonal Diwali sales data to identify high-performing products and customer demographics. Generated insights to optimise targeting and improve marketing campaign performance.',
-  'hr-analysis':          'Explored HR datasets to surface patterns in employee attrition, department performance, and demographics using Python and data visualisation tools.',
+  'weather-analysis':               'Analysed historical weather data to identify climate patterns, seasonal trends, and anomalies. Used Python and visualisation libraries to surface actionable insights from temperature, humidity, and precipitation data.',
+  'hr-analysis':                    'Explored HR datasets to surface patterns in employee attrition, department performance, and demographics using Python and data visualisation tools.',
+  'customer-churn-prediction':      'Built a machine learning model to predict customer churn using classification algorithms. Performed feature engineering and EDA to identify key drivers of churn and improve retention strategies.',
+  'image-classification-using-ann': 'Developed an Artificial Neural Network to classify images across multiple categories. Implemented data preprocessing, model training, and evaluation using Python and deep learning frameworks.',
+  'sql-project':                    'Designed and queried relational databases to solve real-world business problems. Leveraged advanced SQL techniques including joins, subqueries, window functions, and aggregations to extract meaningful insights.',
 };
 
 async function loadProjects(){
