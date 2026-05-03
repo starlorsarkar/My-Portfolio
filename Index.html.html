@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anwesha Sarkar — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#04040a;--bg2:#070710;--card:#0c0c1e;--card2:#0f0f22;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --text:#f0f0ff;--muted:#8888aa;--dim:#555570;
+  --v1:#ff6b35;--v2:#f72585;--v3:#7209b7;--v4:#3a86ff;--v5:#06d6a0;--v6:#ffd166;
+  --grad1:linear-gradient(135deg,var(--v2),var(--v1));
+  --grad2:linear-gradient(135deg,var(--v4),var(--v3));
+  --grad3:linear-gradient(135deg,var(--v5),var(--v4));
+}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;overflow-x:hidden;cursor:none}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9998;opacity:0.5}
+
+.cursor{position:fixed;width:10px;height:10px;background:var(--v2);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--v2);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);opacity:0.6;transition:left 0.12s ease,top 0.12s ease}
+
+.mesh{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 50% 50% at 20% 20%,rgba(247,37,133,0.12) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(58,134,255,0.1) 0%,transparent 60%),radial-gradient(ellipse 30% 30% at 60% 30%,rgba(114,9,183,0.08) 0%,transparent 50%);animation:meshMove 12s ease-in-out infinite alternate}
+@keyframes meshMove{0%{opacity:1;transform:scale(1)}100%{opacity:0.7;transform:scale(1.08)}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3.5rem;background:rgba(4,4,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Cabinet Grotesk',sans-serif;font-weight:900;font-size:1.15rem;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+nav ul{display:flex;gap:2rem;list-style:none}
+nav ul a{color:var(--muted);text-decoration:none;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.25s}
+nav ul a:hover{color:var(--v2)}
+
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding:9rem 3.5rem 5rem;position:relative;overflow:hidden;max-width:1300px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border-radius:100px;background:rgba(247,37,133,0.1);border:1px solid rgba(247,37,133,0.3);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--v2);margin-bottom:2rem}
+.badge-dot{width:6px;height:6px;background:var(--v2);border-radius:50%;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+h1{font-family:'Cabinet Grotesk',sans-serif;font-weight:900;font-size:clamp(3.2rem,6vw,5.8rem);line-height:0.95;letter-spacing:-0.04em;margin-bottom:1.5rem}
+h1 .line1{display:block;color:var(--text)}
+h1 .line2{display:block;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-role{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.25rem;color:var(--muted);margin-bottom:1.5rem}
+.hero-desc{font-size:0.82rem;line-height:2;color:var(--muted);max-width:480px;margin-bottom:2.5rem}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+
+.btn-fire{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2.2rem;background:var(--grad1);color:#fff;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:0.85rem;letter-spacing:0.05em;text-decoration:none;border:none;cursor:none;border-radius:4px;box-shadow:0 0 30px rgba(247,37,133,0.3);transition:transform 0.2s,box-shadow 0.2s}
+.btn-fire:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(247,37,133,0.5)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2.2rem;background:transparent;color:var(--text);font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.05em;text-decoration:none;border:1px solid var(--border2);border-radius:4px;cursor:none;transition:border-color 0.2s,color 0.2s,transform 0.2s}
+.btn-ghost:hover{border-color:var(--v4);color:var(--v4);transform:translateY(-2px)}
+
+.hero-right{position:relative;z-index:2;display:flex;justify-content:center;align-items:center}
+.data-visual{width:100%;max-width:420px;background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:2rem;position:relative;overflow:hidden}
+.data-visual::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(247,37,133,0.05),rgba(58,134,255,0.05))}
+.dv-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.8rem}
+.dv-title{font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:0.85rem;color:var(--text)}
+.dv-live{display:flex;align-items:center;gap:0.4rem;font-size:0.65rem;color:var(--v5);letter-spacing:0.1em}
+.dv-live-dot{width:5px;height:5px;background:var(--v5);border-radius:50%;animation:blink 1s infinite}
+.chart-bars{display:flex;align-items:flex-end;gap:0.5rem;height:100px;margin-bottom:1.5rem}
+.bar{flex:1;border-radius:3px 3px 0 0;opacity:0.85;animation:barGrow 1.5s cubic-bezier(0.16,1,0.3,1) forwards;transform-origin:bottom}
+@keyframes barGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.dv-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.dv-stat{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:0.9rem}
+.dv-stat-num{font-family:'Cabinet Grotesk',sans-serif;font-weight:900;font-size:1.4rem}
+.dv-stat-label{font-size:0.65rem;color:var(--muted);margin-top:0.2rem;letter-spacing:0.08em}
+.chip{position:absolute;background:var(--card2);border:1px solid var(--border2);border-radius:100px;padding:0.4rem 0.9rem;font-size:0.68rem;font-family:'Cabinet Grotesk',sans-serif;font-weight:700;white-space:nowrap;animation:float 4s ease-in-out infinite}
+.chip1{top:-20px;right:30px;color:var(--v2);border-color:rgba(247,37,133,0.3);animation-delay:0s}
+.chip2{bottom:-15px;left:20px;color:var(--v4);border-color:rgba(58,134,255,0.3);animation-delay:1.5s}
+.chip3{top:40%;right:-30px;color:var(--v5);border-color:rgba(6,214,160,0.3);animation-delay:0.8s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.stats-strip{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 3.5rem;display:flex;justify-content:center;gap:0;position:relative;z-index:2}
+.stat-block{flex:1;max-width:200px;text-align:center;padding:0 2rem;border-right:1px solid var(--border)}
+.stat-block:last-child{border-right:none}
+.stat-big{font-family:'Cabinet Grotesk',sans-serif;font-weight:900;font-size:2.8rem;letter-spacing:-0.04em;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-lbl{font-size:0.68rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.3rem}
+
+.section-wrap{max-width:1200px;margin:0 auto;padding:7rem 3.5rem}
+.eyebrow{display:flex;align-items:center;gap:0.8rem;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--v2);margin-bottom:1rem}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--v2)}
+.sec-h2{font-family:'Cabinet Grotesk',sans-serif;font-weight:900;font-size:clamp(2.2rem,4vw,3.5rem);letter-spacing:-0.03em;line-height:1.0;margin-bottom:0.6rem}
+.sec-h2 em{font-family:'Fraunces',serif;font-style:italic;font-weight:300;color:var(--muted)}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-top:3.5rem}
+.sk{background:var(--bg2);padding:1.8rem 1.5rem;display:flex;flex-direction:column;gap:0.8rem;transition:background 0.3s}
+.sk:hover{background:var(--card)}
+.sk-icon{font-size:1.6rem}
+.sk-name{font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:0.88rem;color:var(--text)}
+.sk-track{height:2px;background:var(--border);border-radius:2px;overflow:hidden}
+.sk-fill{height:100%;border-radius:2px;width:0;transition:width 1.4s cubic-bezier(0.16,1,0.3,1)}
+
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-top:3.5rem}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:2rem;display:flex;flex-direction:column;gap:1rem;position:relative;overflow:hidden;transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),border-color 0.3s,box-shadow 0.35s}
+.proj-card:hover{transform:translateY(-6px);border-color:rgba(247,37,133,0.3);box-shadow:0 20px 60px rgba(247,37,133,0.12)}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start}
+.proj-emoji{font-size:1.6rem}
+.proj-links{display:flex;gap:0.8rem}
+.proj-link{display:flex;align-items:center;gap:0.3rem;font-size:0.72rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.proj-link:hover{color:var(--v2)}
+.proj-name{font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:1.05rem;color:var(--text);line-height:1.3}
+.proj-desc{font-size:0.79rem;line-height:1.8;color:var(--muted);flex:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:auto}
+.tag{font-size:0.63rem;padding:0.22rem 0.6rem;border-radius:100px;letter-spacing:0.08em;text-transform:uppercase;border:1px solid}
+.t-pink{background:rgba(247,37,133,0.08);border-color:rgba(247,37,133,0.25);color:var(--v2)}
+.t-blue{background:rgba(58,134,255,0.08);border-color:rgba(58,134,255,0.25);color:var(--v4)}
+.t-green{background:rgba(6,214,160,0.08);border-color:rgba(6,214,160,0.25);color:var(--v5)}
+.t-amber{background:rgba(255,209,102,0.08);border-color:rgba(255,209,102,0.25);color:var(--v6)}
+.t-orange{background:rgba(255,107,53,0.08);border-color:rgba(255,107,53,0.25);color:var(--v1)}
+
+.proj-loader{text-align:center;padding:4rem;color:var(--muted);font-size:0.82rem}
+.spin{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--v2);border-radius:50%;animation:spinning 0.7s linear infinite;margin:0 auto 1rem}
+@keyframes spinning{to{transform:rotate(360deg)}}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.about-body{font-size:0.84rem;line-height:2.1;color:var(--muted)}
+.about-body p{margin-bottom:1.3rem}
+.about-body strong{color:var(--text)}
+.cards-col{display:flex;flex-direction:column;gap:1.2rem}
+.info-card{padding:1.5rem 1.8rem;background:var(--card);border:1px solid var(--border);border-radius:8px;border-left:3px solid rgba(247,37,133,0.4);transition:border-left-color 0.3s}
+.info-card:hover{border-left-color:var(--v2)}
+.ic-label{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+.ic-value{font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:0.95rem;color:var(--text)}
+.ic-sub{font-size:0.75rem;color:var(--dim);margin-top:0.25rem}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-desc{font-size:0.84rem;line-height:2;color:var(--muted);margin-bottom:2rem}
+.contact-items{display:flex;flex-direction:column;gap:1rem}
+.contact-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.3rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:0.82rem;transition:border-color 0.2s,transform 0.2s}
+.contact-item:hover{border-color:var(--v2);transform:translateX(4px)}
+.ci-icon{font-size:1.1rem;width:22px;text-align:center}
+.form-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:2.5rem}
+.fg{margin-bottom:1.2rem}
+.fg label{display:block;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+.fg input,.fg textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.85rem 1rem;font-family:'JetBrains Mono',monospace;font-size:0.82rem;outline:none;border-radius:6px;transition:border-color 0.2s}
+.fg textarea{height:100px;resize:vertical}
+.fg input:focus,.fg textarea:focus{border-color:var(--v2)}
+
+footer{text-align:center;padding:2.5rem 3rem;border-top:1px solid var(--border);font-size:0.72rem;color:var(--dim)}
+footer strong{color:var(--v2)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding:7rem 1.5rem 4rem}
+  .hero-right{display:none}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .section-wrap{padding:5rem 1.5rem}
+  nav{padding:1rem 1.5rem}
+  nav ul{gap:1.2rem}
+  .stats-strip{flex-wrap:wrap;gap:1.5rem;padding:2rem 1.5rem}
+  .stat-block{border-right:none}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="mesh"></div>
+
+<nav>
+  <div class="nav-logo">AS.</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div style="position:relative;z-index:2">
+<section id="hero">
+  <div class="hero-left" style="position:relative;z-index:2">
+    <div class="badge"><div class="badge-dot"></div>Open to Work — Data Analyst Roles</div>
+    <h1>
+      <span class="line1">Anwesha</span>
+      <span class="line2">Sarkar</span>
+    </h1>
+    <p class="hero-role">Data Analyst · Insight Engineer · Storyteller with Numbers</p>
+    <p class="hero-desc">I transform raw, messy data into clear, compelling stories that drive real business decisions. Specialising in Python, SQL, and BI tools — building dashboards and analyses that matter.</p>
+    <div class="cta-row">
+      <a href="#projects" class="btn-fire">↓ View My Work</a>
+      <a href="https://github.com/starlorsarkar" target="_blank" class="btn-ghost">⌥ GitHub</a>
+    </div>
+  </div>
+  <div class="hero-right" style="position:relative;z-index:2">
+    <div style="position:relative;width:100%;max-width:420px">
+      <div class="chip chip1">📊 Power BI</div>
+      <div class="chip chip2">🐍 Python</div>
+      <div class="chip chip3">🗄️ SQL</div>
+      <div class="data-visual">
+        <div class="dv-header">
+          <div class="dv-title">Sales Analysis Dashboard</div>
+          <div class="dv-live"><div class="dv-live-dot"></div>LIVE</div>
+        </div>
+        <div class="chart-bars" id="chartBars"></div>
+        <div class="dv-stats">
+          <div class="dv-stat">
+            <div class="dv-stat-num" style="background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">↑ 24%</div>
+            <div class="dv-stat-label">Revenue Growth</div>
+          </div>
+          <div class="dv-stat">
+            <div class="dv-stat-num" style="background:var(--grad3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">98.2%</div>
+            <div class="dv-stat-label">Accuracy Rate</div>
+          </div>
+          <div class="dv-stat">
+            <div class="dv-stat-num" style="background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">4.7K</div>
+            <div class="dv-stat-label">Rows Analysed</div>
+          </div>
+          <div class="dv-stat">
+            <div class="dv-stat-num" style="color:var(--v6)">12ms</div>
+            <div class="dv-stat-label">Query Time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="stats-strip">
+  <div class="stat-block"><div class="stat-big" id="repo-count">—</div><div class="stat-lbl">GitHub Repos</div></div>
+  <div class="stat-block"><div class="stat-big" id="star-count">—</div><div class="stat-lbl">Total Stars</div></div>
+  <div class="stat-block"><div class="stat-big">6+</div><div class="stat-lbl">Projects</div></div>
+  <div class="stat-block"><div class="stat-big">∞</div><div class="stat-lbl">Curiosity</div></div>
+</div>
+
+<section id="about">
+<div class="section-wrap reveal">
+  <div class="eyebrow">About Me</div>
+  <h2 class="sec-h2">I turn chaos into <em>clarity</em></h2>
+  <div class="about-grid" style="margin-top:3.5rem">
+    <div class="about-body">
+      <p>Hi! I'm <strong>Anwesha Sarkar</strong>, a passionate data analyst who believes every dataset has a story waiting to be told. I love diving into complex data and surfacing insights that help organisations make smarter decisions.</p>
+      <p>My toolkit includes <strong>Python, SQL, Power BI, Tableau, and Excel</strong> — applied across real-world projects covering sales analysis, customer behaviour, financial trends, and more.</p>
+      <p>I'm actively seeking full-time <strong>Data Analyst</strong> opportunities at ambitious companies where data is at the core of strategy. Let's build something great together.</p>
+      <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap">
+        <a href="https://github.com/starlorsarkar" target="_blank" class="btn-ghost" style="font-size:0.75rem;padding:0.65rem 1.4rem">⌥ GitHub Profile</a>
+        <a href="#contact" class="btn-fire" style="font-size:0.75rem;padding:0.65rem 1.4rem">Hire Me →</a>
+      </div>
+    </div>
+    <div class="cards-col">
+      <div class="info-card"><div class="ic-label">Specialisation</div><div class="ic-value">Data Analytics & Business Intelligence</div><div class="ic-sub">EDA · Dashboards · Statistical Analysis · Reporting</div></div>
+      <div class="info-card"><div class="ic-label">Core Languages</div><div class="ic-value">Python · SQL · R</div><div class="ic-sub">Pandas · NumPy · Matplotlib · Seaborn</div></div>
+      <div class="info-card"><div class="ic-label">BI & Visualisation</div><div class="ic-value">Power BI · Tableau · Excel</div><div class="ic-sub">Interactive dashboards · KPI reporting</div></div>
+      <div class="info-card"><div class="ic-label">Current Status</div><div class="ic-value" style="color:var(--v5)">✓ Available — Seeking Full-time Roles</div><div class="ic-sub">Data Analyst · Business Analyst · BI Analyst</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="skills" style="background:var(--bg2)">
+<div class="section-wrap reveal">
+  <div class="eyebrow">Tech Stack</div>
+  <h2 class="sec-h2">Skills & <em>Tools</em></h2>
+  <div class="skills-grid" id="skills-grid"></div>
+</div>
+</section>
+
+<section id="projects">
+<div class="section-wrap reveal">
+  <div class="eyebrow">My Work</div>
+  <h2 class="sec-h2">GitHub <em>Projects</em></h2>
+  <div id="proj-container"><div class="proj-loader"><div class="spin"></div>Fetching from GitHub...</div></div>
+</div>
+</section>
+
+<section id="contact" style="background:var(--bg2)">
+<div class="section-wrap reveal">
+  <div class="eyebrow">Get In Touch</div>
+  <h2 class="sec-h2">Let's <em>Connect</em></h2>
+  <div class="contact-grid" style="margin-top:3.5rem">
+    <div>
+      <p class="contact-desc">I'm actively looking for data analyst roles at top companies. Whether you have a position, a project, or just want to talk data — my inbox is always open.</p>
+      <div class="contact-items">
+        <a href="mailto:sarkaranwesha00@gmail.com" class="contact-item"><span class="ci-icon">✉</span>sarkaranwesha00@gmail.com</a>
+        <a href="https://github.com/starlorsarkar" target="_blank" class="contact-item"><span class="ci-icon">⌥</span>github.com/starlorsarkar</a>
+      </div>
+    </div>
+    <div class="form-box">
+      <div class="fg"><label>Your Name</label><input type="text" placeholder="Jane Smith — Recruiter at Google"/></div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="jane@company.com"/></div>
+      <div class="fg"><label>Message</label><textarea placeholder="I'd love to discuss a data analyst opportunity..."></textarea></div>
+      <button class="btn-fire" style="width:100%;justify-content:center;border-radius:6px;cursor:none" onclick="sendMsg(this)">Send Message →</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>Crafted with passion by <strong>Anwesha Sarkar</strong> · Data Analyst · 2025</p>
+  <p style="margin-top:0.4rem;font-size:0.65rem">sarkaranwesha00@gmail.com · github.com/starlorsarkar</p>
+</footer>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
+
+// CHART BARS
+const barData=[{h:45,c:'var(--v2)'},{h:70,c:'var(--v4)'},{h:55,c:'var(--v5)'},{h:85,c:'var(--v1)'},{h:60,c:'var(--v3)'},{h:95,c:'var(--v2)'},{h:40,c:'var(--v6)'}];
+const chartEl=document.getElementById('chartBars');
+barData.forEach((b,i)=>{const d=document.createElement('div');d.className='bar';d.style.cssText=`height:${b.h}%;background:${b.c};animation-delay:${i*0.12}s`;chartEl.appendChild(d)});
+
+// SKILLS
+const skills=[
+  {icon:'🐍',name:'Python',pct:90,g:'linear-gradient(90deg,var(--v2),var(--v1))'},
+  {icon:'🗄️',name:'SQL',pct:85,g:'linear-gradient(90deg,var(--v4),var(--v3))'},
+  {icon:'📊',name:'Power BI',pct:80,g:'linear-gradient(90deg,var(--v2),var(--v3))'},
+  {icon:'📈',name:'Tableau',pct:75,g:'linear-gradient(90deg,var(--v4),var(--v5))'},
+  {icon:'🐼',name:'Pandas',pct:92,g:'linear-gradient(90deg,var(--v5),var(--v4))'},
+  {icon:'🔢',name:'NumPy',pct:85,g:'linear-gradient(90deg,var(--v1),var(--v2))'},
+  {icon:'📉',name:'Matplotlib',pct:80,g:'linear-gradient(90deg,var(--v3),var(--v4))'},
+  {icon:'🎨',name:'Seaborn',pct:82,g:'linear-gradient(90deg,var(--v5),var(--v2))'},
+  {icon:'📋',name:'Excel',pct:88,g:'linear-gradient(90deg,var(--v6),var(--v1))'},
+  {icon:'📓',name:'Jupyter',pct:93,g:'linear-gradient(90deg,var(--v1),var(--v6))'},
+  {icon:'🔬',name:'EDA',pct:90,g:'linear-gradient(90deg,var(--v2),var(--v4))'},
+  {icon:'📦',name:'Statistics',pct:83,g:'linear-gradient(90deg,var(--v3),var(--v5))'},
+];
+const sg=document.getElementById('skills-grid');
+skills.forEach(s=>{sg.innerHTML+=`<div class="sk"><div class="sk-icon">${s.icon}</div><div class="sk-name">${s.name}</div><div class="sk-track"><div class="sk-fill" data-pct="${s.pct}" style="background:${s.g}"></div></div></div>`});
+const skillObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){document.querySelectorAll('.sk-fill').forEach(f=>{f.style.width=f.dataset.pct+'%'});skillObs.disconnect()}})},{threshold:0.2});
+skillObs.observe(sg);
+
+// GITHUB
+const GH='starlorsarkar';
+const TAGS=['t-pink','t-blue','t-green','t-amber','t-orange'];
+const EMOJIS={python:'🐍',sql:'🗄️',jupyter:'📓',notebook:'📓',power:'📊',tableau:'📈',excel:'📋',dashboard:'📊',analysis:'🔍',data:'📦',visual:'🎨',eda:'🔬',ann:'🧠',neural:'🧠',churn:'📉',diwali:'🪔',walmart:'🛒',music:'🎵',weather:'🌦️',default:'💼'};
+function getEmoji(r){const t=((r.name||'')+(r.description||'')+(r.topics||[]).join(' ')).toLowerCase();for(const[k,v] of Object.entries(EMOJIS))if(t.includes(k))return v;return EMOJIS.default}
+
+// Normalize: lowercase, remove all hyphens/underscores/spaces for fuzzy matching
+function norm(s){return s.toLowerCase().replace(/[-_\s]/g,'');}
+
+// Normalized targets for our 6 projects
+const PINNED_NORM=[
+  'customerchurnpredictionusingann',
+  'diwalisalesanalysis',
+  'walmartproject',
+  'imageclassificationusingann',
+  'musicstoreanalysis',
+  'weatheranalysis'
+];
+
+// Descriptions keyed by normalized name
+const DESCRIPTIONS={
+  'customerchurnpredictionusingann':   'Built an Artificial Neural Network to predict customer churn for a bank. Performed feature engineering, data preprocessing, and model evaluation to identify at-risk customers and support retention strategy decisions.',
+  'diwalisalesanalysis':             'Analysed Diwali season sales data to uncover purchasing patterns across demographics, regions, and product categories. Used Python and Seaborn to visualise trends and surface actionable retail insights.',
+  'walmartproject':                  'Explored Walmart transactional data to identify sales trends, high-performing categories, and regional performance. Applied EDA techniques in Python to deliver business-ready insights for retail decision-making.',
+  'imageclassificationusingann':     'Developed an Artificial Neural Network to classify images across multiple categories. Implemented data preprocessing, model training, and performance evaluation using Python and deep learning frameworks.',
+  'musicstoreanalysis':              'Conducted a deep SQL-based analysis of a digital music store database. Used complex joins, subqueries, and window functions to surface top artists, customer spending patterns, and genre popularity insights.',
+  'weatheranalysis':                 'Analysed historical weather data to identify climate patterns, seasonal trends, and anomalies. Used Python and visualisation libraries to surface actionable insights from temperature, humidity, and precipitation records.',
+};
+
+// Static fallback — shown if GitHub API fails or is rate-limited
+const STATIC=[
+  {name:'Customer Churn Prediction Using ANN',emoji:'🧠',key:'customerchurnpredictionusingann',url:'https://github.com/starlorsarkar/Customer-Churn-Prediction-using-ANN',lang:'Python',tagClasses:['t-pink','t-blue']},
+  {name:'Diwali Sales Analysis',emoji:'🪔',key:'diwalisalesanalysis',url:'https://github.com/starlorsarkar/Diwali_Sales-Analysis',lang:'Python',tagClasses:['t-orange','t-amber']},
+  {name:'Walmart Project',emoji:'🛒',key:'walmartproject',url:'https://github.com/starlorsarkar/Walmart_project',lang:'Python',tagClasses:['t-blue','t-green']},
+  {name:'Image Classification Using ANN',emoji:'🧠',key:'imageclassificationusingann',url:'https://github.com/starlorsarkar/Image-Classification-using-ANN',lang:'Python',tagClasses:['t-pink','t-blue']},
+  {name:'Musicstore Analysis',emoji:'🎵',key:'musicstoreanalysis',url:'https://github.com/starlorsarkar/Musicstore-analysis',lang:'SQL',tagClasses:['t-green','t-blue']},
+  {name:'Weather Analysis',emoji:'🌦️',key:'weatheranalysis',url:'https://github.com/starlorsarkar/Weather_Analysis',lang:'Python',tagClasses:['t-blue','t-green']},
+];
+
+function buildCard(displayName,emoji,desc,htmlUrl,homepage,language,stars,topics,delay){
+  const card=document.createElement('div');
+  card.className='proj-card reveal';
+  card.style.transitionDelay=`${delay}s`;
+  card.innerHTML=`
+    <div class="proj-top">
+      <div class="proj-emoji">${emoji}</div>
+      <div class="proj-links">
+        ${homepage?`<a href="${homepage}" target="_blank" class="proj-link">↗ Demo</a>`:''}
+        <a href="${htmlUrl}" target="_blank" class="proj-link">⌥ Code</a>
+      </div>
+    </div>
+    <div class="proj-name">${displayName}</div>
+    <div class="proj-desc">${desc}</div>
+    <div class="proj-tags">
+      ${topics.map((t,j)=>`<span class="tag ${TAGS[j%TAGS.length]}">${t}</span>`).join('')}
+      ${language?`<span class="tag t-blue">${language}</span>`:''}
+      ${stars>0?`<span class="tag t-amber">★ ${stars}</span>`:''}
+    </div>`;
+  return card;
+}
+
+function renderStatic(){
+  const container=document.getElementById('proj-container');
+  const grid=document.createElement('div');
+  grid.className='proj-grid';
+  STATIC.forEach((p,i)=>{
+    const desc=DESCRIPTIONS[p.key]||'';
+    const tagSpans=p.tagClasses.map(t=>`<span class="tag ${t}">${t.replace('t-','')}</span>`).join('');
+    const card=document.createElement('div');
+    card.className='proj-card reveal';
+    card.style.transitionDelay=`${i*0.09}s`;
+    card.innerHTML=`
+      <div class="proj-top">
+        <div class="proj-emoji">${p.emoji}</div>
+        <div class="proj-links"><a href="${p.url}" target="_blank" class="proj-link">⌥ Code</a></div>
+      </div>
+      <div class="proj-name">${p.name}</div>
+      <div class="proj-desc">${desc}</div>
+      <div class="proj-tags">${tagSpans}<span class="tag t-blue">${p.lang}</span></div>`;
+    grid.appendChild(card);
+  });
+  container.innerHTML='';
+  container.appendChild(grid);
+  document.querySelectorAll('.proj-card').forEach(el=>revObs.observe(el));
+}
+
+async function loadProjects(){
+  const container=document.getElementById('proj-container');
+  try{
+    // Fetch ALL repos in one call — avoids exact-name failures
+    const res=await fetch(`https://api.github.com/users/${GH}/repos?per_page=100&sort=updated`,{headers:{'Accept':'application/vnd.github+json'}});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const all=await res.json();
+    if(!Array.isArray(all)||all.length===0) throw new Error('empty');
+
+    // Stats strip
+    document.getElementById('repo-count').textContent=all.length;
+    document.getElementById('star-count').textContent=all.reduce((a,r)=>a+r.stargazers_count,0);
+
+    // Match each target to a repo by fuzzy-normalized name
+    const seen=new Set();
+    const matched=[];
+    PINNED_NORM.forEach(target=>{
+      const repo=all.find(r=>{
+        const n=norm(r.name);
+        return !seen.has(r.id)&&(n===target||n.includes(target)||target.includes(n));
+      });
+      if(repo){seen.add(repo.id);matched.push(repo);}
+    });
+
+    // Fall back to static if we couldn't match enough
+    if(matched.length<2){renderStatic();return;}
+
+    const grid=document.createElement('div');
+    grid.className='proj-grid';
+    matched.forEach((r,i)=>{
+      const key=norm(r.name);
+      const desc=DESCRIPTIONS[key]||r.description||'A data analytics project exploring insights from real-world datasets.';
+      const emoji=getEmoji(r);
+      const topics=(r.topics||[]).slice(0,4);
+      const displayName=r.name.replace(/[-_]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+      grid.appendChild(buildCard(displayName,emoji,desc,r.html_url,r.homepage,r.language,r.stargazers_count,topics,i*0.09));
+    });
+    container.innerHTML='';
+    container.appendChild(grid);
+    document.querySelectorAll('.proj-card').forEach(el=>revObs.observe(el));
+  }catch(e){
+    console.warn('GitHub API unavailable, using static data:',e.message);
+    renderStatic();
+  }
+}
+
+// SCROLL REVEAL
+const revObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revObs.unobserve(e.target)}})},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+// SEND MSG
+function sendMsg(btn){btn.textContent='Message Sent ✓';btn.style.background='linear-gradient(135deg,var(--v5),var(--v4))';setTimeout(()=>{btn.textContent='Send Message →';btn.style.background=''},3500)}
+
+loadProjects();
+</script>
+</body>
+</html>
